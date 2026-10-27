@@ -447,8 +447,8 @@ with bar_col:
         unsafe_allow_html=True,
     )
 
-st.title("🤝 AI 英语朋友")
-st.caption("温柔的英语学习伙伴，陪你练习、聊天，也认真倾听。")
+st.title("Hi，今天想聊点什么？")
+st.caption("🤝 你的 AI 英语朋友 · 温柔的英语学习伙伴，陪你练习、聊天，也认真倾听。")
 
 daily_encouragement = ENCOURAGEMENTS[date.today().toordinal() % len(ENCOURAGEMENTS)]
 st.markdown(
