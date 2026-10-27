@@ -11,3 +11,7 @@ __pycache__/
 # ===== 密钥（如果以后用 secrets.toml）=====
 .streamlit/secrets.toml
 .secrets.toml
+
+# ===== 内部/私人文档（不上传公开仓库）=====
+项目交接.md
+关于李添恩的记忆.md
