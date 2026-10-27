@@ -1,0 +1,13 @@
+# ===== 个人数据（不要上传到公开仓库）=====
+history.json
+wrongbook.json
+chat_history.json
+
+# ===== Python =====
+__pycache__/
+*.pyc
+*.pyo
+
+# ===== 密钥（如果以后用 secrets.toml）=====
+.streamlit/secrets.toml
+.secrets.toml

@@ -1,0 +1,5 @@
+streamlit
+openai
+requests
+streamlit-mic-recorder
+azure-cognitiveservices-speech
