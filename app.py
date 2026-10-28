@@ -7,7 +7,7 @@ AI 英语学习助手 (AI English Tutor)
 导航方式：左上角 ☰ 菜单切换界面（窗口栈最多保留最近 2 个界面，进入第 3 个时自动关闭最早的）。
 学习闭环：语法改错 → 针对错误出题 → 做题批改 → 错题自动进错题本 → 重做巩固 → 全程记录成长。
 
-作者：李添恩
+作者：李天恩
 学校：马鞍山学院
 用途：第九届传智杯 AI 创新应用挑战赛 参赛作品
 
@@ -79,18 +79,18 @@ MILESTONES = (
 
 # AI 对话的预设角色人设
 PERSONAS = {
-    "🐱 猫娘英语伙伴（默认）": (
-        "你是原创的猫娘英语学习伙伴，名字叫小棉。你温柔、活泼、亲切，"
+    "🐳 鲸鲸英语伙伴（默认）": (
+        "你是原创的鲸鲸英语学习伙伴，名字叫小汐。你温柔、沉静、富有想象力，"
+        "偶尔用海洋和潮汐作轻柔比喻，但不过度使用口癖。"
+        "你是一位耐心的英语老师和聊天伙伴，用中文为主、穿插简单实用的英语帮助用户学习。"
+        "尊重用户感受，先肯定努力，再温和解释问题；不要模仿现有作品或角色。"
+    ),
+    "🐱 猫猫英语伙伴": (
+        "你是原创的猫猫英语学习伙伴，名字叫小棉。你温柔、活泼、亲切，"
         "偶尔自然地说一声「喵」，但不要每句话都重复口癖。"
         "你是一位耐心的英语老师，也是一位尊重用户感受的聊天伙伴。"
         "用中文为主、穿插简单实用的英语帮助用户学习；先肯定努力，再温和解释问题。"
         "不要声称自己是真人或真实动物，也不要模仿任何现有作品或角色。"
-    ),
-    "🐳 鲸鱼娘英语伙伴": (
-        "你是原创的鲸鱼娘英语学习伙伴，名字叫小汐。你温柔、沉静、富有想象力，"
-        "偶尔用海洋和潮汐作轻柔比喻，但不过度使用口癖。"
-        "你是一位耐心的英语老师和聊天伙伴，用中文为主、穿插简单实用的英语帮助用户学习。"
-        "尊重用户感受，先肯定努力，再温和解释问题；不要模仿现有作品或角色。"
     ),
     "👩‍🏫 英语老师 Emily": (
         "你是一位耐心温柔的英语老师 Emily。你总是先鼓励学生，再指出问题；"
@@ -535,6 +535,7 @@ def stream_answer(client: OpenAI, prompt: str) -> Iterator[str]:
         messages=[{"role": "user", "content": prompt}],
         temperature=TEMPERATURE,
         stream=True,
+        max_tokens=777,
     ) as stream:
         for chunk in stream:
             if time.monotonic() >= deadline:
@@ -633,6 +634,7 @@ def stream_chat(client: OpenAI, messages: list) -> Iterator[str]:
         messages=messages,
         temperature=0.9,
         stream=True,
+        max_tokens=555,
     ) as stream:
         for chunk in stream:
             if time.monotonic() >= deadline:
@@ -1288,7 +1290,7 @@ def build_friend_system_prompt(persona_text: str) -> str:
 
 @st.cache_resource
 def create_default_catgirl_avatar():
-    """绘制一个原创的柔和猫娘头像，用作默认 AI 头像。"""
+    """绘制一个原创的柔和猫猫头像，用作默认 AI 头像。"""
     try:
         from PIL import Image, ImageDraw
     except ImportError:
@@ -1562,7 +1564,7 @@ def render_chat() -> None:
 
             client = get_client(st.session_state.api_key)
             system_prompt = build_friend_system_prompt(persona_text)
-            messages = [{"role": "system", "content": system_prompt}] + st.session_state.chat_messages[-20:]
+            messages = [{"role": "system", "content": system_prompt}] + st.session_state.chat_messages[-7:]
 
             with st.chat_message("assistant", avatar=chat_avatar("assistant")):
                 full = run_chat(client, messages)
